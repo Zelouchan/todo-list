@@ -39,5 +39,4 @@ export function setUpNavBar() {
     createSortButton();
     assignSortFunctiontoButton();
     createProjectButton();
-
 }
