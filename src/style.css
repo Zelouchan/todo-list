@@ -1,5 +1,11 @@
 :root {
-/* stuff */
+    --colour1: black;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -9,30 +15,42 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 20% auto 10%;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 20% 1fr 5%;
     grid-template-areas: 
     "header header"
     "nav content"
     "footer footer";
+    height: 100%;
+    width: 100%;
+
 }
 
-header {
+#header {
     grid-area: header;
     border: 1px solid black;
     background-color: yellow;
+    height: 100%;
+    width: 100%;
 }
 
-nav {
+#nav {
     grid-area: nav;
-    border: 1px solid greenyellow;
+    background-color: greenyellow;
+    height: 100%;
+    width: 100%;
 }
 
-content {
+#content {
     grid-area: content;
+    height: 100%;
+    width: 100%;
+    background-color: blueviolet;
 }
 
-footer {
+#footer {
     grid-area: footer;
-    border: 1px solid blue;
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
 }

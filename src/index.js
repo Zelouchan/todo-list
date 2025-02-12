@@ -1,15 +1,18 @@
 import { compareAsc, format } from "date-fns";
-import './styles.css';
+import './style.css';
+import {header} from "./userInterfaceElements";
 
-format(new Date(2014, 1, 11), "yyyy-MM-dd");
-//=> '2014-02-11'
+header();
 
-const dates = [
-  new Date(1995, 6, 2),
-  new Date(1987, 1, 11),
-  new Date(1989, 6, 10),
-];
-dates.sort(compareAsc);
+// format(new Date(2014, 1, 11), "yyyy-MM-dd");
+// //=> '2014-02-11'
+
+// const dates = [
+//   new Date(1995, 6, 2),
+//   new Date(1987, 1, 11),
+//   new Date(1989, 6, 10),
+// ];
+// dates.sort(compareAsc);
 //=> [
 //   Wed Feb 11 1987 00:00:00,
 //   Mon Jul 10 1989 00:00:00,

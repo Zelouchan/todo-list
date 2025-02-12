@@ -10,9 +10,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   devServer: {
-    contentBase: "./dist",
-    hot: true,
+  static: {
+    directory: path.join(__dirname, 'dist'),
   },
+  compress: true,
+  port: 9000
+},
+
   module: {
     rules: [
       {
