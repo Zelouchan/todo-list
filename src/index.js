@@ -2,11 +2,15 @@ import { compareAsc, format } from "date-fns";
 import './style.css';
 import {headerFooter} from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
-import { projectCreationForm } from "./dom-manipulation.js";
+import { projectCreationForm, taskCreationForm } from "./dom-manipulation.js";
 
 headerFooter();
 setUpNavBar();
-projectCreationForm();
+// projectCreationForm();
+// taskCreationForm();
+
+const newProject = document.getElementById("createNewProject")
+newProject.addEventListener("click", projectCreationForm);
 
 // format(new Date(2014, 1, 11), "yyyy-MM-dd");
 // //=> '2014-02-11'
