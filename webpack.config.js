@@ -8,14 +8,15 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: "images/[hash][ext][query]", // Custom output for images
   },
   devServer: {
-  static: {
-    directory: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 9000,
   },
-  compress: true,
-  port: 9000
-},
 
   module: {
     rules: [
@@ -23,8 +24,13 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset/resource", // Handles images properly
+      },
     ],
   },
+
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
