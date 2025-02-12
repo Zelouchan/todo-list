@@ -1,0 +1,64 @@
+Key:
+    \\ know how to do
+    ?? google
+    ~~ extra credit option
+
+Modules
+    Dom Manipulation => used localStorage
+    userInterface => all static elements
+    userInput => stores user input in localStorage
+    functions => including buttons
+
+Create Project
+    project due date
+        ?? takes calendar input
+    project name
+        \\ form input field single line
+    project description
+        \\ form input field double line
+    project finished (strike through text)
+        \\ checkbox
+    project delete
+        \\ button, event listener delete array item
+    save button
+        \\ form submit button
+    details project can be editted
+        ?? how to edit data, have it stay in input field
+    ?Assign colour to project? 
+        ~~ extra credit
+
+Create Task
+    task name
+        \\ form input field single line
+    task note
+        \\ form input field triple line
+    task priority (assign class for styling)
+        \\ drop down menu
+    task due date {date fns}
+        ?? add calendar input
+    task finished (strike through text)
+        \\ checkbox to change class
+    task delete
+        \\ button to delate array
+    can only create task on project page
+        \\ only have create task button appear when a project is selected
+    Expand task for edit and details
+        \\ pop up screen or no wait when drop down button is click delete innerhtml=>new one with info
+    details project can be editted
+        ?? how to edit data, have it stay in input field
+    
+Main User Interface 
+    Header with title
+        \\ cute title, maybe quote and logo
+    nav bar - sort projects by due date
+        \\ populate with example projects
+    add projects button
+        \\ once new project is created will take to project page
+
+Random notes and reminders
+    Default project when app opens is first due
+    sort tasks in project either by due date OR priority
+    Make sure no error if there is nothing in local storage
+
+Extra Credit
+    Calendar with task due dates 

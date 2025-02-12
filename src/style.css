@@ -1,0 +1,38 @@
+:root {
+/* stuff */
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 20% auto 10%;
+    grid-template-areas: 
+    "header header"
+    "nav content"
+    "footer footer";
+}
+
+header {
+    grid-area: header;
+    border: 1px solid black;
+    background-color: yellow;
+}
+
+nav {
+    grid-area: nav;
+    border: 1px solid greenyellow;
+}
+
+content {
+    grid-area: content;
+}
+
+footer {
+    grid-area: footer;
+    border: 1px solid blue;
+}
