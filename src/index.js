@@ -3,11 +3,15 @@ import './style.css';
 import {headerFooter} from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
 import { projectCreationForm, taskCreationForm } from "./dom-manipulation.js";
+// import { projectsInputted } from "./userInput.js";
 
 headerFooter();
 setUpNavBar();
 // projectCreationForm();
 // taskCreationForm();
+
+// console.log(projectsInputted);
+
 
 const newProject = document.getElementById("createNewProject")
 newProject.addEventListener("click", projectCreationForm);
