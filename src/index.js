@@ -1,8 +1,12 @@
 import { compareAsc, format } from "date-fns";
 import './style.css';
-import {header} from "./userInterfaceElements";
+import {headerFooter} from "./HeaderFooter";
+import { setUpNavBar } from "./nav.js";
+import { projectCreationForm } from "./dom-manipulation.js";
 
-header();
+headerFooter();
+setUpNavBar();
+projectCreationForm();
 
 // format(new Date(2014, 1, 11), "yyyy-MM-dd");
 // //=> '2014-02-11'
