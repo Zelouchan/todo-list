@@ -96,5 +96,6 @@ function deleteButton() {
 }
 
 function deleteProject() {
-    
-}
+    deleteButton.addEventListener("click", function () {
+     storedProjects.splice(index, 1);
+})};
