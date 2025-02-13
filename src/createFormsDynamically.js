@@ -1,4 +1,4 @@
-import { takeFormInput } from "./userInput";
+import { takeProjectFormInput } from "./userInput";
 const contentBox = document.getElementById("content");
 
 export function projectCreationForm() {
@@ -149,5 +149,5 @@ export function submitButton() {
   formContainer.appendChild(submitButton);
 
   const form = document.getElementById("submitBTN");
-  form.addEventListener("click", takeFormInput);
+  form.addEventListener("click", takeProjectFormInput);
 }

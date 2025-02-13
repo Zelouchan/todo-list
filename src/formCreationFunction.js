@@ -1,4 +1,4 @@
-import { submitButton, projectCreationForm, taskCreationForm } from "./dom-manipulation";
+import { submitButton, projectCreationForm, taskCreationForm } from "./createFormsDynamically";
 const contentBox = document.getElementById("content");
 
 export function createProjectForm() {
@@ -12,3 +12,4 @@ export function createTaskForm() {
     taskCreationForm();
     submitButton();
 }
+

@@ -10,18 +10,6 @@ Modules
     functions => including buttons
 
 Create Project
-    project due date
-        ?? takes calendar input
-    project name
-        \\ form input field single line
-    project description
-        \\ form input field double line
-    project finished (strike through text)
-        \\ checkbox
-    project delete
-        \\ button, event listener delete array item
-    save button
-        \\ form submit button
     details project can be editted
         ?? how to edit data, have it stay in input field
     ?Assign colour to project? 
@@ -48,8 +36,6 @@ Create Task
         ?? how to edit data, have it stay in input field
     
 Main User Interface 
-    Header with title
-        \\ cute title, maybe quote and logo
     nav bar - sort projects by due date
         \\ populate with example projects
     add projects button

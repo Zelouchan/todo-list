@@ -1,6 +1,7 @@
 // Storing user inputted projects
 export const projectsInputted = JSON.parse(localStorage.getItem("projects")) || [];
 
+
 class Project {
     constructor(title, description, dueDate, priority, finished) {
         this.title = title;
@@ -11,7 +12,7 @@ class Project {
     }
 }
 
-export function takeFormInput(event) {
+export function takeProjectFormInput(event) {
     event.preventDefault(); 
 
     const projectTitle = document.getElementById("projectTitle").value;
@@ -26,5 +27,7 @@ export function takeFormInput(event) {
 
     localStorage.setItem('projects', JSON.stringify(projectsInputted));
 }
+
+
 
 
