@@ -1,7 +1,7 @@
+import { takeFormInput } from "./userInput";
 const contentBox = document.getElementById("content");
 
 export function projectCreationForm() {
-  // contentBox.innerHTML = "";
   const inputForm = document.createElement("form");
   contentBox.appendChild(inputForm);
 
@@ -69,21 +69,13 @@ export function projectCreationForm() {
   projectPriorityLabel.textContent = "Set Project Priority: ";
   projectPriorityLabel.appendChild(dropdown);
   formContainer.appendChild(projectPriorityLabel);
-
-  let submitButton = document.createElement("button");
-  submitButton.type = "submit";
-  submitButton.innerText = "Submit";
-  submitButton.id="submitBTN";
-  formContainer.appendChild(submitButton);
 }
 
 export function taskCreationForm() {
-  // contentBox.innerHTML = "";
   const inputForm = document.createElement("form");
   contentBox.appendChild(inputForm);
 
   const formContainer = document.getElementsByTagName("form")[0];
-
   const taskTitle = document.createElement("input");
   taskTitle.type = "text";
   taskTitle.id = "taskTitle";
@@ -146,10 +138,16 @@ export function taskCreationForm() {
   taskPriorityLabel.textContent = "Set Task Priority: ";
   taskPriorityLabel.appendChild(dropdown);
   formContainer.appendChild(taskPriorityLabel);
+}
 
+export function submitButton() {
+  const formContainer = document.getElementsByTagName("form")[0];
   let submitButton = document.createElement("button");
   submitButton.type = "submit";
   submitButton.innerText = "Submit";
-  submitButton.id="submitBTN";
+  submitButton.id = "submitBTN";
   formContainer.appendChild(submitButton);
+
+  const form = document.getElementById("submitBTN");
+  form.addEventListener("click", takeFormInput);
 }

@@ -1,7 +1,7 @@
-// Getting project input values
-export const projectsInputted = [];
+// Storing user inputted projects
+export const projectsInputted = JSON.parse(localStorage.getItem("projects")) || [];
 
-class project  {
+class Project {
     constructor(title, description, dueDate, priority, finished) {
         this.title = title;
         this.description = description;
@@ -11,29 +11,20 @@ class project  {
     }
 }
 
-// Getting task input values
-// const taskTitle = document.getElementById("taskTitle").value;
-// const taskNotes = document.getElementById("taskNotes").value;
-// const taskDueDate = document.getElementById("taskDueDate").value;
-// const taskPriority = document.getElementById("taskPriority").checked; // Checkbox
-// const taskFinished = document.getElementById("taskFinished").checked; // Checkbox
-
-const form = document.getElementById("submitBTN");
-
-// form.addEventListener("click", function (event) {
-//     event.preventDefault();
+export function takeFormInput(event) {
+    event.preventDefault(); 
 
     const projectTitle = document.getElementById("projectTitle").value;
     const projectDescription = document.getElementById("projectDescription").value;
     const projectDueDate = document.getElementById("projectDueDate").value;
-    const projectPriority = document.getElementById("projectPriority").checked; // Checkbox
+    const projectPriority = document.getElementById("projectPriority").value;
     const projectFinished = document.getElementById("projectFinished").checked; // Checkbox
-    
 
-const newProject = new project(projectTitle, projectDescription, projectDueDate, projectPriority, projectFinished);
-});
-projectsInputted.push(newProject);
+    const newProject = new Project(projectTitle, projectDescription, projectDueDate, projectPriority, projectFinished);
 
+    projectsInputted.push(newProject);
 
+    localStorage.setItem('projects', JSON.stringify(projectsInputted));
+}
 
 

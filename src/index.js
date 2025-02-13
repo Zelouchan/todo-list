@@ -2,19 +2,21 @@ import { compareAsc, format } from "date-fns";
 import './style.css';
 import {headerFooter} from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
-import { projectCreationForm, taskCreationForm } from "./dom-manipulation.js";
-// import { projectsInputted } from "./userInput.js";
+import { createProjectForm, createTaskForm } from "./formCreationFunction.js";
+import { getStoredProjects } from "./localStorage.js";
 
 headerFooter();
 setUpNavBar();
-// projectCreationForm();
-// taskCreationForm();
 
-// console.log(projectsInputted);
+
+console.log(getStoredProjects());
 
 
 const newProject = document.getElementById("createNewProject")
-newProject.addEventListener("click", projectCreationForm);
+newProject.addEventListener("click", createProjectForm);
+
+// delete all projects
+
 
 // format(new Date(2014, 1, 11), "yyyy-MM-dd");
 // //=> '2014-02-11'
