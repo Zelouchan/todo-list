@@ -3,17 +3,10 @@ Key:
     ?? google
     ~~ extra credit option
 
-Modules
-    Dom Manipulation => used localStorage
-    userInterface => all static elements
-    userInput => stores user input in localStorage
-    functions => including buttons
-
-Create Project
-    details project can be editted
-        ?? how to edit data, have it stay in input field
-    ?Assign colour to project? 
-        ~~ extra credit
+Still to do:
+Create task button in project page
+Give tasks same functionality as projects, but only from project page
+Create a list in the project of task titles and priority flag with an edit button to call all the information 
 
 Create Task
     task name

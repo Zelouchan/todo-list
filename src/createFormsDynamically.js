@@ -46,8 +46,6 @@ export function callProjectForm(index) {
   createDate("projectDueDate", "Due Date: ", projectDueDate);
   createDropdown("projectPriority", "Priority Level: ", projectPriority);
   createCheckbox("projectFinished", "Project Finished? ", projectFinished);
-  saveChangesButton();
+  saveChangesButton(index);
   deleteButton(index);
-
-  console.log("Create project form for project:", projectTitle);
 }

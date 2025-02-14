@@ -11,7 +11,7 @@ export function createProjectButton() {
     projectButtonsContainer.classList.add("projectButton");
     navBarMain.appendChild(projectButtonsContainer);
   } else {
-    projectButtonsContainer.innerHTML = ''; 
+    projectButtonsContainer.innerHTML = "";
   }
 
   const allProjects = getStoredProjects();
@@ -27,12 +27,10 @@ export function createProjectButton() {
       displayProjectDetails(index);
     });
   });
-
-  console.log(allProjects);
 }
 
 export function displayProjectDetails(index) {
-  const allProjects = getStoredProjects(); 
+  const allProjects = getStoredProjects();
   const project = allProjects[index];
 
   if (!project) {
@@ -40,8 +38,7 @@ export function displayProjectDetails(index) {
     return;
   } else {
     const contentBox = document.getElementById("content");
-contentBox.innerHTML = "";
-    // create a function that calls all the project information
+    contentBox.innerHTML = "";
     callProjectForm(index);
   }
 
