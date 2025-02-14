@@ -44,6 +44,4 @@ export function displayProjectDetails(index) {
 
     callProjectForm(index);
   }
-
-  console.log("Displaying details for:", project.title);
 }

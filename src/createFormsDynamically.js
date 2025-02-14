@@ -40,8 +40,8 @@ export function callProjectForm(index) {
   let projectTitle = project.title || '';
   let projectDescription = project.description || '';
   let projectDueDate = project.dueDate || '';
-  let projectPriority = project.priority || 'Medium'; // Fallback to "Medium"
-  let projectFinished = project.finished || false; // Fallback to false
+  let projectPriority = project.priority || 'Medium';
+  let projectFinished = project.finished || false; 
 
   createInputForm("inputForm");
   createInputText("projectTitle", "Title: ", projectTitle);
@@ -49,6 +49,32 @@ export function callProjectForm(index) {
   createDate("projectDueDate", "Due Date: ", projectDueDate);
   createDropdown("projectPriority", "Priority Level: ", projectPriority);
   createCheckbox("projectFinished", "Project Finished? ", projectFinished);
+  saveChangesButton(index);
+  deleteButton(index);
+}
+
+export function callProjectForm(index) {
+  contentBox.innerHTML = "";
+  // const allProjects = getStoredProjects();
+  // const project = allProjects[index];
+
+  if (!project) {
+    console.error("Project not found.");
+    return;
+  }
+
+  // let projectTitle = project.title || '';
+  // let projectDescription = project.description || '';
+  // let projectDueDate = project.dueDate || '';
+  // let projectPriority = project.priority || 'Medium';
+  // let projectFinished = project.finished || false; 
+
+  createInputForm("inputForm");
+  createInputText("taskTitle", "Title: ", projectTitle);
+  createInputText("taskDescription", "Description: ", projectDescription);
+  createDate("taskDueDate", "Due Date: ", projectDueDate);
+  createDropdown("taskPriority", "Priority Level: ", projectPriority)
+  createCheckbox("taskFinished","Task Finished? ", projectFinished)
   saveChangesButton(index);
   deleteButton(index);
 }
