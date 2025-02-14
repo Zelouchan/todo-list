@@ -1,5 +1,7 @@
 const contentBox = document.getElementById("content");
-import { takeProjectFormInput } from "./userInput";
+import { takeProjectFormInput, changeProjectForm } from "./userInput";
+import { createProjectButton } from "./createProjectDisplay";
+import { saveProjects, getStoredProjects } from "./localStorage";
 
 export function createInputForm(klas) {
   const inputForm = document.createElement("form");
@@ -7,11 +9,12 @@ export function createInputForm(klas) {
   contentBox.appendChild(inputForm);
 }
 
-export function createInputText(aiDee, textInput) {
+export function createInputText(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form"); 
   const inputField = document.createElement("input");
   inputField.type = "text";
   inputField.id = aiDee;
+  inputField.value = projectValue || '';
 
   const label = document.createElement("label");
   label.setAttribute("for", aiDee);
@@ -21,11 +24,12 @@ export function createInputText(aiDee, textInput) {
   formContainer.appendChild(inputField);
 }
 
-export function createDate(aiDee, textInput) {
+export function createDate(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const inputField = document.createElement("input");
   inputField.type = "date";
   inputField.id = aiDee;
+  inputField.value = projectValue || '';
 
   const label = document.createElement("label");
   label.setAttribute("for", aiDee);
@@ -35,11 +39,12 @@ export function createDate(aiDee, textInput) {
   formContainer.appendChild(inputField);
 }
 
-export function createCheckbox(aiDee, textInput) {
+export function createCheckbox(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.id = aiDee;
+  checkbox.checked = projectValue || false;
 
   const label = document.createElement("label");
   label.setAttribute("for", aiDee);
@@ -49,10 +54,11 @@ export function createCheckbox(aiDee, textInput) {
   formContainer.appendChild(checkbox);
 }
 
-export function createDropdown(aiDee, textInput) {
+export function createDropdown(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const dropdown = document.createElement("select");
   dropdown.id = aiDee;
+  dropdown.value = projectValue;
 
   const options = ["High", "Mid", "Low"];
   options.forEach((optionText) => {
@@ -82,10 +88,12 @@ export function submitButton() {
     event.preventDefault();
     takeProjectFormInput();
     console.log("Form submitted!");
+    
+    contentBox.innerHTML = "";  
   });
 }
 
-export function deleteButton() {
+export function deleteButton(index) {
   const formContainer = document.querySelector("form");
   let deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
@@ -93,8 +101,29 @@ export function deleteButton() {
   formContainer.appendChild(deleteButton);
 
   deleteButton.addEventListener("click", (event) => {
-    // event.preventDefault();
-    // add code to remove array
-    console.log("Form deleted.");
+    event.preventDefault();
+
+      const allProjects = getStoredProjects(); 
+      allProjects.splice(index, 1);
+    saveProjects(allProjects);
+
+    contentBox.innerHTML = ""; 
+    createProjectButton();
+  });
+}
+
+
+export function saveChangesButton() {
+  const formContainer = document.querySelector("form");
+  let changeButton = document.createElement("button");
+  changeButton.type = "submit";
+  changeButton.innerText = "Save Changes";
+  changeButton.id = "saveChange";
+  formContainer.appendChild(changeButton);
+
+  changeButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    changeProjectForm();
+    saveProjects(allProjects);
   });
 }

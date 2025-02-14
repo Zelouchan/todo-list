@@ -1,3 +1,5 @@
+// localStorage.removeItem("projects");
+
 const navBarMain = document.getElementById("nav");
 const navBarContainer = document.createElement("div");
 navBarContainer.id ="navBarTop";

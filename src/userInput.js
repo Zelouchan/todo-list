@@ -1,6 +1,7 @@
 // Storing user inputted projects
 export const projectsInputted = JSON.parse(localStorage.getItem("projects")) || [];
-
+import { createProjectButton } from "./createProjectDisplay";
+import { getStoredProjects, saveProjects } from "./localStorage";
 
 class Project {
     constructor(title, description, dueDate, priority, finished) {
@@ -13,8 +14,6 @@ class Project {
 }
 
 export function takeProjectFormInput(event) {
-    event.preventDefault(); 
-
     const projectTitle = document.getElementById("projectTitle").value;
     const projectDescription = document.getElementById("projectDescription").value;
     const projectDueDate = document.getElementById("projectDueDate").value;
@@ -26,8 +25,25 @@ export function takeProjectFormInput(event) {
     projectsInputted.push(newProject);
 
     localStorage.setItem('projects', JSON.stringify(projectsInputted));
+    
+createProjectButton();
 }
 
+export function changeProjectForm(index) {
+    let allProjects = getStoredProjects();
+    let updatedProject = {
+        title: document.getElementById("projectTitle").value,
+        description: document.getElementById("projectDescription").value,
+        dueDate: document.getElementById("projectDueDate").value,
+        priority: document.getElementById("projectPriority").value,
+        finished: document.getElementById("projectFinished").checked
+      };
+  
+      allProjects[index] = updatedProject; 
+      saveProjects(allProjects); 
+
+createProjectButton();
+}
 
 
 

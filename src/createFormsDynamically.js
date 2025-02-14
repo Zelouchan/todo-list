@@ -1,5 +1,6 @@
 const contentBox = document.getElementById("content");
-import {createInputForm, createInputText, createCheckbox, createDate, createDropdown, submitButton, deleteButton} from "./helperFunctions.js"
+import {createInputForm, createInputText, createCheckbox, createDate, createDropdown, submitButton, deleteButton, saveChangesButton} from "./helperFunctions.js"
+import { getStoredProjects } from "./localStorage";
 
 export function createNewProjectForm() {
   createInputForm("inputForm");
@@ -15,8 +16,8 @@ export function createNewProjectForm() {
 
 export function createNewTasktForm() {
   createInputForm("inputForm");
-  createInputText("taskTitle", "Title: ");
-  createInputText("taskDescription", "Description: ");
+  createInputText("taskTitle", "Title: ", "");
+  createInputText("taskDescription", "Description: ", "");
   createDate("taskDueDate", "Due Date: ");
   createDropdown("taskPriority", "Priority Level: ")
   createCheckbox("taskFinished","Task Finished? ")
@@ -24,3 +25,29 @@ export function createNewTasktForm() {
   deleteButton();
 }
 
+export function callProjectForm(index) {
+  const allProjects = getStoredProjects();
+  const project = allProjects[index];
+
+  if (!project) {
+    console.error("Project not found.");
+    return;
+  }
+
+  let projectTitle = project.title || '';
+  let projectDescription = project.description || '';
+  let projectDueDate = project.dueDate || '';
+  let projectPriority = project.priority || 'Medium'; // Fallback to "Medium"
+  let projectFinished = project.finished || false; // Fallback to false
+
+  createInputForm("inputForm");
+  createInputText("projectTitle", "Title: ", projectTitle);
+  createInputText("projectDescription", "Description: ", projectDescription);
+  createDate("projectDueDate", "Due Date: ", projectDueDate);
+  createDropdown("projectPriority", "Priority Level: ", projectPriority);
+  createCheckbox("projectFinished", "Project Finished? ", projectFinished);
+  saveChangesButton();
+  deleteButton(index);
+
+  console.log("Create project form for project:", projectTitle);
+}

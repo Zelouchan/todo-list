@@ -1,13 +1,20 @@
 import { getStoredProjects } from "./localStorage";
-const allProjects = getStoredProjects();
+import { callProjectForm } from "./createFormsDynamically";
 
 export function createProjectButton() {
   const navBarMain = document.getElementById("nav");
+  let projectButtonsContainer = document.getElementById("buttonContainer");
 
-  const projectButtonsContainer = document.createElement("div");
-  projectButtonsContainer.id = "buttonContainer";
-  projectButtonsContainer.classList.add("projectButton");
-  navBarMain.appendChild(projectButtonsContainer);
+  if (!projectButtonsContainer) {
+    projectButtonsContainer = document.createElement("div");
+    projectButtonsContainer.id = "buttonContainer";
+    projectButtonsContainer.classList.add("projectButton");
+    navBarMain.appendChild(projectButtonsContainer);
+  } else {
+    projectButtonsContainer.innerHTML = ''; 
+  }
+
+  const allProjects = getStoredProjects();
 
   allProjects.forEach((project, index) => {
     const projectButton = document.createElement("button");
@@ -20,17 +27,23 @@ export function createProjectButton() {
       displayProjectDetails(index);
     });
   });
+
+  console.log(allProjects);
 }
 
 export function displayProjectDetails(index) {
+  const allProjects = getStoredProjects(); 
   const project = allProjects[index];
 
   if (!project) {
     alert("Project not found");
     return;
+  } else {
+    const contentBox = document.getElementById("content");
+contentBox.innerHTML = "";
+    // create a function that calls all the project information
+    callProjectForm(index);
   }
 
-else {
-    console.log("test");
-  }
+  console.log("Displaying details for:", project.title);
 }
