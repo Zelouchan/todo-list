@@ -1,6 +1,7 @@
 const contentBox = document.getElementById("content");
+import {createInputForm, createInputText, createCheckbox, createDate, createDropdown, submitButton, deleteButton} from "./helperFunctions.js"
 
- export function createNewProjectForm() {
+export function createNewProjectForm() {
   createInputForm("inputForm");
   createInputText("projectTitle", "Title: ");
   createInputText("projectDescription", "Description: ");
@@ -9,6 +10,7 @@ const contentBox = document.getElementById("content");
   createCheckbox("projectFinished","Project Finished? ")
   submitButton();
   deleteButton();
+  console.log("create project");
 }
 
 export function createNewTasktForm() {

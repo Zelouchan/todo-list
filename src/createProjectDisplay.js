@@ -30,7 +30,7 @@ export function displayProjectDetails(index) {
     return;
   }
 
-  function projectDetails() {
+else {
     console.log("test");
   }
 }
