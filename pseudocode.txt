@@ -7,6 +7,8 @@ Still to do:
 Create task button in project page
 Give tasks same functionality as projects, but only from project page
 Create a list in the project of task titles and priority flag with an edit button to call all the information 
+won't allow fields with no input
+create a new project clears contentbox
 
 Create Task
     task name

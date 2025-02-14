@@ -1,13 +1,17 @@
 // localStorage.removeItem("projects");
 
 const navBarMain = document.getElementById("nav");
+const projectsTitle = document.createElement("div");
+projectsTitle.innerText = "Current Projects";
+projectsTitle.classList.add("sortBTNtitle");
 const navBarContainer = document.createElement("div");
 navBarContainer.id ="navBarTop";
 const sortButtonTitle = document.createElement("div")
-sortButtonTitle.id = "sortBTNtitle";
+sortButtonTitle.classList.add("sortBTNtitle");
 sortButtonTitle.textContent = "Sort Projects";
 navBarMain.appendChild(sortButtonTitle);
 navBarMain.appendChild(navBarContainer);
+navBarMain.appendChild(projectsTitle);
 
 function createSortButton() {
     ["A-Z", "Prio", "Due"].forEach((text, i) => {
@@ -30,7 +34,7 @@ function assignSortFunctiontoButton() {
     console.log("just so it is not empty")
 }
 
-const createProjectButton = () => {
+export const createProjectButton = () => {
  const createProjectBtn = document.createElement("button");
  createProjectBtn.id = "createNewProject";
  createProjectBtn.textContent = "Create a New Project";
@@ -38,7 +42,7 @@ const createProjectButton = () => {
 }
 
 export function setUpNavBar() {
+    createProjectButton();
     createSortButton();
     assignSortFunctiontoButton();
-    createProjectButton();
 }

@@ -3,6 +3,7 @@ import {createInputForm, createInputText, createCheckbox, createDate, createDrop
 import { getStoredProjects } from "./localStorage";
 
 export function createNewProjectForm() {
+  contentBox.innerHTML = "";
   createInputForm("inputForm");
   createInputText("projectTitle", "Title: ");
   createInputText("projectDescription", "Description: ");
@@ -15,6 +16,7 @@ export function createNewProjectForm() {
 }
 
 export function createNewTasktForm() {
+  contentBox.innerHTML = "";
   createInputForm("inputForm");
   createInputText("taskTitle", "Title: ", "");
   createInputText("taskDescription", "Description: ", "");
@@ -26,6 +28,7 @@ export function createNewTasktForm() {
 }
 
 export function callProjectForm(index) {
+  contentBox.innerHTML = "";
   const allProjects = getStoredProjects();
   const project = allProjects[index];
 

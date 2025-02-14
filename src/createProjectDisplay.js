@@ -27,6 +27,8 @@ export function createProjectButton() {
       displayProjectDetails(index);
     });
   });
+
+  console.log(allProjects);
 }
 
 export function displayProjectDetails(index) {
@@ -39,6 +41,7 @@ export function displayProjectDetails(index) {
   } else {
     const contentBox = document.getElementById("content");
     contentBox.innerHTML = "";
+
     callProjectForm(index);
   }
 

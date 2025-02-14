@@ -54,7 +54,10 @@ main {
 
 #nav {
   grid-area: nav;
-  justify-content: center;
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #content {
@@ -98,12 +101,9 @@ main {
 #navBarTop {
     display: flex;
     justify-content: space-evenly;
-    border: 1px solid var(--blueish);
-    border-radius: 25px;
-    margin: 2%;
 }
 
-#sortBTNtitle {
+.sortBTNtitle {
     text-align: end;
     color: var(--blueish);
     font-weight: bold;
@@ -172,5 +172,15 @@ form>button {
   font-size: 16px;
 padding: 10px 50px;
 border: 2px solid var(--night);
-
 }
+
+.projectButton button {
+  width: 90%;
+  border: none;
+  background-color: var(--blueish);
+  color:  var(--ash-gray);
+  padding: 1em;
+  border-radius: 50px;
+  margin: 5% 0%;
+}
+
