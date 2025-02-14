@@ -1,5 +1,5 @@
 const contentBox = document.getElementById("content");
-import {createInputForm, createInputText, createCheckbox, createDate, createDropdown, submitButton, deleteButton, saveChangesButton} from "./formHelpers.js"
+import {createInputForm, createInputText, createCheckbox, createDate, createDropdown, submitButton, deleteButton, saveChangesButton} from "./helperFunctions.js"
 import { getStoredProjects } from "./localStorage";
 
 export function createNewProjectForm() {
