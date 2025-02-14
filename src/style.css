@@ -1,9 +1,9 @@
 :root {
-    --night: hsla(164, 71%, 4%, 1);
-    --ash-gray: hsla(87, 7%, 75%, 1);
-    --silver: hsla(120, 2%, 67%, 1);
-    --blueish: #355691;
-    --purpureus: hsla(291, 27%, 51%, 1);
+  --night: hsla(164, 71%, 4%, 1);
+  --ash-gray: hsla(87, 7%, 75%, 1);
+  --silver: hsla(120, 2%, 67%, 1);
+  --blueish: #355691;
+  --purpureus: hsla(291, 27%, 51%, 1);
 }
 
 * {
@@ -39,7 +39,7 @@ main {
   grid-template-areas:
     "logo name"
     "logo tagline";
-    display: grid;
+  display: grid;
 }
 
 #header,
@@ -54,10 +54,8 @@ main {
 
 #nav {
   grid-area: nav;
-  align-items: center;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 #content {
@@ -81,8 +79,8 @@ main {
   align-items: center;
 }
 
-#logoDiv>img {
-    transform: scaleX(-1);
+#logoDiv > img {
+  transform: scaleX(-1);
 }
 
 #pageName {
@@ -99,35 +97,35 @@ main {
 }
 
 #navBarTop {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .sortBTNtitle {
-    text-align: end;
-    color: var(--blueish);
-    font-weight: bold;
-    padding-right: 10%;
+  text-align: end;
+  color: var(--blueish);
+  font-weight: bold;
+  padding-right: 10%;
 }
 
-#nav>button {
-    width: 90%;
-    border: none;
-    background-color: var(--blueish);
-    color:  var(--ash-gray);
-    padding: 1em;
-    border-radius: 50px;
-    margin: 5% 0%;
+#nav > button {
+  width: 90%;
+  border: none;
+  background-color: var(--blueish);
+  color: var(--ash-gray);
+  padding: 1em;
+  border-radius: 50px;
+  margin: 5% 0%;
 }
 
 .sortButtons {
-    width: 50px;
-    height: 50px;
-    margin: 10% 0%;
-    border-radius: 50%;
-    border: none;
-    background-color: var(--blueish);
-    color:  var(--ash-gray);
+  width: 50px;
+  height: 50px;
+  margin: 10% 0%;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--blueish);
+  color: var(--ash-gray);
 }
 
 form {
@@ -139,7 +137,7 @@ form {
   justify-content: space-between;
   align-items: start;
   grid-template-rows: repeat(6, 1fr);
-  border: 2px solid ;
+  border: 2px solid;
   padding: 3%;
   margin: 5%;
   color: var(--night);
@@ -164,23 +162,22 @@ option {
   border: 2px solid var(--night);
 }
 
-form>button {
+form > button {
   color: var(--night);
   border: none;
-  background-color: var(--silver);  
+  background-color: var(--silver);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-padding: 10px 50px;
-border: 2px solid var(--night);
+  padding: 10px 50px;
+  border: 2px solid var(--night);
 }
 
 .projectButton button {
   width: 90%;
   border: none;
   background-color: var(--blueish);
-  color:  var(--ash-gray);
+  color: var(--ash-gray);
   padding: 1em;
   border-radius: 50px;
   margin: 5% 0%;
 }
-
