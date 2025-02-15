@@ -11,7 +11,6 @@ import {
   saveChangesButton,
 } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage.js";
-import { callProjectForm } from "./createForms";
 
 export function createNewProjectForm() {
   contentBox.innerHTML = "";
@@ -134,7 +133,6 @@ export function displayProjectDetails(index) {
   } else {
     const contentBox = document.getElementById("content");
     contentBox.innerHTML = "";
-
     callProjectForm(index);
   }
 }
