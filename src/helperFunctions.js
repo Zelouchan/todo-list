@@ -93,7 +93,7 @@ export function submitProjectButton() {
   });
 }
 
-export function submitTaskButton() {
+export function submitTaskButton(projectIndex) {
   const formContainer = document.querySelector("form");
   let submitTaskButton = document.createElement("button");
   submitTaskButton.type = "submit";
@@ -103,7 +103,7 @@ export function submitTaskButton() {
 
   submitTaskButton.addEventListener("click", (event) => {
     event.preventDefault();
-    takeTaskFormInput();
+    takeTaskFormInput(projectIndex);
     console.log("Form submitted!");
 
   });
@@ -143,7 +143,7 @@ export function saveChangesButton(index) {
   });
 }
 
-export function addTask() {
+export function addTask(projectIndex) {
   const formContainer = document.querySelector("form");
   let addTaskButton = document.createElement("button");
   addTaskButton.type = "submit";
@@ -153,7 +153,7 @@ export function addTask() {
 
   addTaskButton.addEventListener("click", (event) => {
     event.preventDefault();
-    createNewTasktForm();
+    createNewTasktForm(projectIndex);
   });
 }
 
@@ -175,12 +175,15 @@ export function createProjectButton() {
   allProjects.forEach((project, index) => {
     const projectButton = document.createElement("button");
     projectButton.id = `project-${index}`;
+    projectButton.dataset.index = index;
     projectButton.innerText = `${project.title}`;
 
     projectButtonsContainer.appendChild(projectButton);
 
-    projectButton.addEventListener("click", () => {
+    projectButton.addEventListener("click", (event) => {
       displayProjectDetails(index);
+    const projectIndex = event.target.dataset.index;
+    addTask(projectIndex);
     });
   });
 }

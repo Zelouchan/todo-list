@@ -1,7 +1,8 @@
 // deals with all user input
 import { createProjectButton } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage";
-const projectsInputted = getStoredProjects();
+const allProjects = getStoredProjects();
+
 
 class Project {
   constructor(title, description, dueDate, priority, finished, tasks = []) {
@@ -14,7 +15,7 @@ class Project {
   }
 }
 
-export function takeProjectFormInput(event) {
+export function takeProjectFormInput() {
   const contentBox = document.getElementById("content");
   const projectTitleInput = document.getElementById("projectTitle");
   const projectDescriptionInput = document.getElementById("projectDescription");
@@ -43,8 +44,8 @@ export function takeProjectFormInput(event) {
       projectTasks
   );
 
-  projectsInputted.push(newProject);
-  saveProjects(projectsInputted);
+  allProjects.push(newProject);
+  saveProjects(allProjects);
 
   createProjectButton();
   contentBox.innerHTML = ""; // Clear the form
@@ -60,7 +61,7 @@ class Task {
   
 } }
 
-export function takeTaskFormInput(event, index) {
+export function takeTaskFormInput(projectIndex) {
   const contentBox = document.getElementById("content");
   const taskTitleInput = document.getElementById("taskTitle");
   const taskDescriptionInput = document.getElementById("taskDescription");
@@ -82,20 +83,17 @@ export function takeTaskFormInput(event, index) {
       taskFinished
   );
 
-  const allProjects = getStoredProjects();
-
-  if (!allProjects[index]) { // Check if the project exists
-    console.error("Project not found at index:", index);
+  if (!allProjects[projectIndex]) { // Check if the project exists
+    console.error("Project not found at index:", projectIndex);
     return;
   }
 
-  const testy = "test 1";
-allProjects[index].tasks.push(testy);
+allProjects[projectIndex].tasks.push(newTask);
 
-  // allProjects[index].tasks.push(newTask);
-  saveProjects(projectsInputted);
 
-  createProjectButton();
+  saveProjects(allProjects);
+
+  createProjectButton(projectIndex);
   contentBox.innerHTML = ""; // Clear the form
 }
 
@@ -112,7 +110,7 @@ export function changeProjectForm(index) {
   allProjects[index] = updatedProject;
   saveProjects(allProjects);
 
-  createProjectButton();
+  createProjectButton(index);
 }
 
 // export function changeTasksForm(projectIndex, taskIndex) {

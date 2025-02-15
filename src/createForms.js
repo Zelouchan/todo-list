@@ -27,7 +27,7 @@ export function createNewProjectForm() {
   console.log("create project");
 }
 
-export function createNewTasktForm() {
+export function createNewTasktForm(projectIndex) {
   contentBox.innerHTML = "";
   createInputForm("inputForm");
   createInputText("taskTitle", "Task Title: ", "", 15);
@@ -35,7 +35,7 @@ export function createNewTasktForm() {
   createDate("taskDueDate", "Due Date: ");
   createDropdown("taskPriority", "Priority Level: ");
   createCheckbox("taskFinished", "Task Finished? ");
-  submitTaskButton();
+  submitTaskButton(projectIndex);
 }
 
 export function callProjectForm(index) {
@@ -96,9 +96,9 @@ export function callTaskForm(index) {
   deleteButton(index);
 }
 
-export function displayProjectDetails(index) {
+export function displayProjectDetails(projectIndex) {
   const allProjects = getStoredProjects();
-  const project = allProjects[index];
+  const project = allProjects[projectIndex];
 
   if (!project) {
     alert("Project not found");
@@ -128,14 +128,14 @@ export function displayProjectDetails(index) {
     detailsContainer.appendChild(dueDateParagraph);
     detailsContainer.appendChild(priorityParagraph);
     editProjectButton();
-    deleteButton(index);
-    addTask();
+    deleteButton();
+    // addTask();
 
     const editProjectBut  = document.getElementById("editProject");
 
     editProjectBut.addEventListener("click", (event) => {
       event.preventDefault();
-      callProjectForm(index);
+      callProjectForm();
     });
   }
 }
