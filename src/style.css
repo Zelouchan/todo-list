@@ -108,16 +108,6 @@ main {
   padding-right: 10%;
 }
 
-#nav > button {
-  width: 90%;
-  border: none;
-  background-color: var(--blueish);
-  color: var(--ash-gray);
-  padding: 1em;
-  border-radius: 50px;
-  margin: 5% 0%;
-}
-
 .sortButtons {
   width: 50px;
   height: 50px;
@@ -130,36 +120,35 @@ main {
 
 form {
   box-sizing: border-box;
-  height: 50%;
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-  grid-template-rows: repeat(6, 1fr);
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
   border: 2px solid;
-  padding: 3%;
+  padding: 5% 0%;
   margin: 5%;
   color: var(--night);
   background-color: var(--ash-gray);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
+  gap: 3%;
 }
 
-input {
+input,
+#projectPriority,
+#taskPriority {
   box-sizing: border-box;
-  width: 300px;
+  width: 10em;
   border: 2px solid var(--night);
   color: var(--night);
   font-size: 16px;
   padding: 2px;
+  background-color: var(--ash-gray);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-option {
-  color: var(--night);
-  font-size: 16px;
-  padding: 2px;
-  border: 2px solid var(--night);
+#taskDescription {
+  width: 10em;
+  field-sizing: content;
 }
 
 form > button {
@@ -168,11 +157,14 @@ form > button {
   background-color: var(--silver);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  padding: 10px 50px;
+  height: 2em;
+  width: 10em;
   border: 2px solid var(--night);
+  margin: 2% 0%;
 }
 
-.projectButton button {
+.projectButton button,
+#createNewProject {
   width: 90%;
   border: none;
   background-color: var(--blueish);
@@ -180,4 +172,25 @@ form > button {
   padding: 1em;
   border-radius: 50px;
   margin: 5% 0%;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+height: 20px;
+  border: 2px solid var(--night);
+  position: relative;
+  cursor: pointer;
+  background-color: var(--ash-gray);
+}
+
+/* Adding a checkmark */
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: var(--night);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

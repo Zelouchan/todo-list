@@ -2,6 +2,7 @@ const contentBox = document.getElementById("content");
 import { takeProjectFormInput, changeProjectForm } from "./userInput";
 import { createProjectButton } from "./createProjectDisplay";
 import { saveProjects, getStoredProjects } from "./localStorage";
+import { createNewTasktForm } from "./createForms";
 
 export function createInputForm(klas) {
   const inputForm = document.createElement("form");
@@ -9,9 +10,10 @@ export function createInputForm(klas) {
   contentBox.appendChild(inputForm);
 }
 
-export function createInputText(aiDee, textInput, projectValue) {
+export function createInputText(aiDee, textInput, projectValue, length) {
   const formContainer = document.querySelector("form");
   const inputField = document.createElement("input");
+  inputField.maxLength = length;
   inputField.type = "text";
   inputField.id = aiDee;
   inputField.value = projectValue || "";
@@ -125,3 +127,18 @@ export function saveChangesButton(index) {
     changeProjectForm(index);
   });
 }
+
+export function addTask() {
+  const formContainer = document.querySelector("form");
+  let addTaskButton = document.createElement("button");
+  addTaskButton.type = "submit";
+  addTaskButton.innerText = "Add Task";
+  addTaskButton.id = "addTask";
+  formContainer.appendChild(addTaskButton);
+
+  addTaskButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    createNewTasktForm();
+  });
+}
+

@@ -1,11 +1,12 @@
-// import { compareAsc, format } from "date-fns";
+// index.js
+import { compareAsc, format } from "date-fns";
 import "./style.css";
 import { headerFooter } from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
 
 import { getStoredProjects } from "./localStorage.js";
 import { createProjectButton } from "./createProjectDisplay.js";
-import { createNewProjectForm } from "./createFormsDynamically.js";
+import { createNewProjectForm } from "./createForms.js";
 
 headerFooter();
 setUpNavBar();

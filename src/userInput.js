@@ -1,7 +1,8 @@
 // Storing user inputted projects
 export const projectsInputted =
   JSON.parse(localStorage.getItem("projects")) || [];
-import { createProjectButton } from "./createProjectDisplay";
+import { createProjectButton } from "./createForms";
+import { addTask } from "./helperFunctions";
 import { getStoredProjects, saveProjects } from "./localStorage";
 
 class Project {
@@ -11,30 +12,45 @@ class Project {
     this.dueDate = dueDate;
     this.priority = priority;
     this.finished = finished;
+    this.tasks = [];
   }
+    addTask(task) {
+      this.tasks.push(task);
+    }
 }
 
 export function takeProjectFormInput(event) {
-  const projectTitle = document.getElementById("projectTitle").value;
-  const projectDescription =
-    document.getElementById("projectDescription").value;
-  const projectDueDate = document.getElementById("projectDueDate").value;
-  const projectPriority = document.getElementById("projectPriority").value;
-  const projectFinished = document.getElementById("projectFinished").checked; // Checkbox
+
+  const projectTitleInput = document.getElementById("projectTitle");
+  const projectDescriptionInput = document.getElementById("projectDescription");
+  const projectDueDateInput = document.getElementById("projectDueDate");
+  const projectPriorityInput = document.getElementById("projectPriority");
+  const projectFinishedInput = document.getElementById("projectFinished");
+
+  if (!projectTitleInput || !projectDescriptionInput || !projectDueDateInput || !projectPriorityInput || !projectFinishedInput) {
+      console.error("One or more input elements not found!");
+      return; // Stop execution to prevent further errors
+  }
+
+  const projectTitle = projectTitleInput.value;
+  const projectDescription = projectDescriptionInput.value;
+  const projectDueDate = projectDueDateInput.value;
+  const projectPriority = projectPriorityInput.value;
+  const projectFinished = projectFinishedInput.checked;
 
   const newProject = new Project(
-    projectTitle,
-    projectDescription,
-    projectDueDate,
-    projectPriority,
-    projectFinished
+      projectTitle,
+      projectDescription,
+      projectDueDate,
+      projectPriority,
+      projectFinished
   );
 
   projectsInputted.push(newProject);
-
-  localStorage.setItem("projects", JSON.stringify(projectsInputted));
+  saveProjects(projectsInputted);
 
   createProjectButton();
+  contentBox.innerHTML = ""; // Clear the form
 }
 
 export function changeProjectForm(index) {
@@ -51,4 +67,25 @@ export function changeProjectForm(index) {
   saveProjects(allProjects);
 
   createProjectButton();
+}
+
+export function changeTasksForm(projectIndex, taskIndex) {
+  const allProjects = getStoredProjects();
+  const project = allProjects[projectIndex];
+
+  if (!project || !project.tasks[taskIndex]) {
+      console.error("Project or task not found.");
+      return;
+  }
+
+  project.tasks[taskIndex] = { 
+      title: document.getElementById("taskTitle").value,
+      description: document.getElementById("taskDescription").value,
+      dueDate: document.getElementById("taskDueDate").value,
+      priority: document.getElementById("taskPriority").value,
+      finished: document.getElementById("taskFinished").checked,
+  };
+
+  saveProjects(allProjects);
+  displayProjectDetails(projectIndex);
 }
