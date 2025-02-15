@@ -1,9 +1,7 @@
-// Storing user inputted projects
-export const projectsInputted =
-  JSON.parse(localStorage.getItem("projects")) || [];
-import { createProjectButton } from "./createForms";
-import { addTask } from "./helperFunctions";
+// deals with all user input
+import { createProjectButton } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage";
+const projectsInputted = getStoredProjects();
 
 class Project {
   constructor(title, description, dueDate, priority, finished) {

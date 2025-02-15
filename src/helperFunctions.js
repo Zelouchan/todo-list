@@ -1,8 +1,7 @@
 const contentBox = document.getElementById("content");
 import { takeProjectFormInput, changeProjectForm } from "./userInput";
-import { createProjectButton } from "./createProjectDisplay";
 import { saveProjects, getStoredProjects } from "./localStorage";
-import { createNewTasktForm } from "./createForms";
+import { createNewTasktForm, callProjectForm, displayProjectDetails } from "./createForms";
 
 export function createInputForm(klas) {
   const inputForm = document.createElement("form");
@@ -125,6 +124,7 @@ export function saveChangesButton(index) {
   changeButton.addEventListener("click", (event) => {
     event.preventDefault();
     changeProjectForm(index);
+    displayProjectDetails(index);
   });
 }
 
@@ -142,3 +142,39 @@ export function addTask() {
   });
 }
 
+export function createProjectButton() {
+  const navBarMain = document.getElementById("nav");
+  let projectButtonsContainer = document.getElementById("buttonContainer");
+
+  if (!projectButtonsContainer) {
+    projectButtonsContainer = document.createElement("div");
+    projectButtonsContainer.id = "buttonContainer";
+    projectButtonsContainer.classList.add("projectButton");
+    navBarMain.appendChild(projectButtonsContainer);
+  } else {
+    projectButtonsContainer.innerHTML = "";
+  }
+
+  const allProjects = getStoredProjects();
+
+  allProjects.forEach((project, index) => {
+    const projectButton = document.createElement("button");
+    projectButton.id = `project-${index}`;
+    projectButton.innerText = `${project.title}`;
+
+    projectButtonsContainer.appendChild(projectButton);
+
+    projectButton.addEventListener("click", () => {
+      displayProjectDetails(index);
+    });
+  });
+}
+
+export function editProjectButton() {
+  const formContainer = document.querySelector("form");
+  let editProjectButton = document.createElement("button");
+  editProjectButton.type = "submit";
+  editProjectButton.innerText = "Edit Project";
+  editProjectButton.id = "editProject";
+  formContainer.appendChild(editProjectButton);
+  };
