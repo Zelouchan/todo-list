@@ -7,10 +7,11 @@ import {
   createCheckbox,
   createDate,
   createDropdown,
-  submitButton,
+  submitTaskButton,
+  submitProjectButton,
   deleteButton,
   saveChangesButton,
-  editProjectButton,
+  editProjectButton
 } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage.js";
 
@@ -22,7 +23,7 @@ export function createNewProjectForm() {
   createDate("projectDueDate", "Due Date: ");
   createDropdown("projectPriority", "Priority Level: ");
   createCheckbox("projectFinished", "Project Finished? ");
-  submitButton();
+  submitProjectButton();
   console.log("create project");
 }
 
@@ -34,7 +35,7 @@ export function createNewTasktForm() {
   createDate("taskDueDate", "Due Date: ");
   createDropdown("taskPriority", "Priority Level: ");
   createCheckbox("taskFinished", "Task Finished? ");
-  submitButton();
+  submitTaskButton();
 }
 
 export function callProjectForm(index) {
@@ -107,8 +108,28 @@ export function displayProjectDetails(index) {
     contentBox.innerHTML = "";
     createInputForm();
     const formContainer = document.querySelector("form");
-    formContainer.innerText = `${project.title}`;
+    const detailsContainer = document.createElement('div'); // Or whatever container you prefer
+
+    const titleHeading = document.createElement('h2');
+    titleHeading.textContent = project.title;
+
+    const descriptionParagraph = document.createElement('p');
+    descriptionParagraph.textContent = project.description;
+
+    const dueDateParagraph = document.createElement('p');
+    dueDateParagraph.textContent = `Due Date: ${project.dueDate}`; // Nicer formatting
+
+    const priorityParagraph = document.createElement('p');
+    priorityParagraph.textContent = `Priority: ${project.priority}`;
+
+    formContainer.appendChild(detailsContainer);
+    detailsContainer.appendChild(titleHeading);
+    detailsContainer.appendChild(descriptionParagraph);
+    detailsContainer.appendChild(dueDateParagraph);
+    detailsContainer.appendChild(priorityParagraph);
     editProjectButton();
+    deleteButton(index);
+    addTask();
 
     const editProjectBut  = document.getElementById("editProject");
 

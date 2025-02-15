@@ -1,5 +1,5 @@
 const contentBox = document.getElementById("content");
-import { takeProjectFormInput, changeProjectForm } from "./userInput";
+import { takeProjectFormInput, changeProjectForm, takeTaskFormInput } from "./userInput";
 import { saveProjects, getStoredProjects } from "./localStorage";
 import { createNewTasktForm, callProjectForm, displayProjectDetails } from "./createForms";
 
@@ -77,20 +77,35 @@ export function createDropdown(aiDee, textInput, projectValue) {
   formContainer.appendChild(dropdown);
 }
 
-export function submitButton() {
+export function submitProjectButton() {
   const formContainer = document.querySelector("form");
-  let submitButton = document.createElement("button");
-  submitButton.type = "submit";
-  submitButton.innerText = "Submit";
-  submitButton.id = "submitBTN";
-  formContainer.appendChild(submitButton);
+  let submitProjectButton = document.createElement("button");
+  submitProjectButton.type = "submit";
+  submitProjectButton.innerText = "Submit";
+  submitProjectButton.id = "submitBTN";
+  formContainer.appendChild(submitProjectButton);
 
-  submitButton.addEventListener("click", (event) => {
+  submitProjectButton.addEventListener("click", (event) => {
     event.preventDefault();
     takeProjectFormInput();
     console.log("Form submitted!");
 
-    contentBox.innerHTML = "";
+  });
+}
+
+export function submitTaskButton() {
+  const formContainer = document.querySelector("form");
+  let submitTaskButton = document.createElement("button");
+  submitTaskButton.type = "submit";
+  submitTaskButton.innerText = "Submit";
+  submitTaskButton.id = "submitBTN";
+  formContainer.appendChild(submitTaskButton);
+
+  submitTaskButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    takeTaskFormInput();
+    console.log("Form submitted!");
+
   });
 }
 
