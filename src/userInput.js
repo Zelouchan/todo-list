@@ -4,13 +4,13 @@ import { getStoredProjects, saveProjects } from "./localStorage";
 const projectsInputted = getStoredProjects();
 
 class Project {
-  constructor(title, description, dueDate, priority, finished) {
+  constructor(title, description, dueDate, priority, finished, tasks = []) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.finished = finished;
-    this.tasks = [];
+    this.tasks = tasks;
   }
 }
 
@@ -32,13 +32,15 @@ export function takeProjectFormInput(event) {
   const projectDueDate = projectDueDateInput.value;
   const projectPriority = projectPriorityInput.value;
   const projectFinished = projectFinishedInput.checked;
+  const projectTasks = [];
 
   const newProject = new Project(
       projectTitle,
       projectDescription,
       projectDueDate,
       projectPriority,
-      projectFinished
+      projectFinished,
+      projectTasks
   );
 
   projectsInputted.push(newProject);
@@ -87,7 +89,10 @@ export function takeTaskFormInput(event, index) {
     return;
   }
 
-  allProjects[index].tasks.push(newTask);
+  const testy = "test 1";
+allProjects[index].tasks.push(testy);
+
+  // allProjects[index].tasks.push(newTask);
   saveProjects(projectsInputted);
 
   createProjectButton();
