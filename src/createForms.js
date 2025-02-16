@@ -1,5 +1,6 @@
 // ties functions together to create the forms
 const contentBox = document.getElementById("content");
+
 import {
   addTask,
   createInputForm,
@@ -15,6 +16,7 @@ import {
   deleteTask
 } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage.js";
+import { changeTasksForm } from "./userInput.js";
 
 export function createNewProjectForm() {
   contentBox.innerHTML = "";
@@ -28,7 +30,7 @@ export function createNewProjectForm() {
   console.log("create project");
 }
 
-export function createNewTasktForm(projectIndex) {
+export function createNewTaskForm(projectIndex) {
   contentBox.innerHTML = "";
   createInputForm("inputForm");
   createInputText("taskTitle", "Task Title: ", "", 15);
@@ -39,10 +41,10 @@ export function createNewTasktForm(projectIndex) {
   submitTaskButton(projectIndex);
 }
 
-export function callProjectForm(index) {
+export function callProjectForm(projectIndex) {
   contentBox.innerHTML = "";
   const allProjects = getStoredProjects();
-  const project = allProjects[index];
+  const project = allProjects[projectIndex];
 
   if (!project) {
     console.error("Project not found.");
@@ -66,9 +68,8 @@ export function callProjectForm(index) {
   createDate("projectDueDate", "Due Date: ", projectDueDate);
   createDropdown("projectPriority", "Priority Level: ", projectPriority);
   createCheckbox("projectFinished", "Project Finished? ", projectFinished);
-  saveChangesButton(index);
-  deleteButton(index);
-  addTask();
+  saveChangesButton(projectIndex);
+  deleteButton(projectIndex);
 }
 
 export function callTaskForm(index) {
@@ -155,7 +156,7 @@ export function displayProjectDetails(projectIndex) {
     editTaskButton.textContent = "Edit";
     editTaskButton.classList.add("smallTaskButton");
     editTaskButton.addEventListener("click", () =>
-      editTask(projectIndex, index)
+      changeTasksForm(projectIndex, index)
     );
 
     const deleteTaskButton = document.createElement("button");
@@ -176,12 +177,11 @@ export function displayProjectDetails(projectIndex) {
 
   editProjectButton();
   deleteButton();
-  addTask(projectIndex);
 
   const editProjectBut = document.getElementById("editProject");
 
   editProjectBut.addEventListener("click", (event) => {
     event.preventDefault();
-    callProjectForm();
+    callProjectForm(index);
   });
 }

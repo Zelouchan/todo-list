@@ -12,20 +12,7 @@ create a new project clears contentbox
 
 Create Task
     task name
-        \\ form input field single line
-    task note
-        \\ form input field triple line
-    task priority (assign class for styling)
-        \\ drop down menu
-    task due date {date fns}
-        ?? add calendar input
-    task finished (strike through text)
-        \\ checkbox to change class
-    task delete
-        \\ button to delate array
-    can only create task on project page
-        \\ only have create task button appear when a project is selected
-    Expand task for edit and details
+      Expand task for edit and details
         \\ pop up screen or no wait when drop down button is click delete innerhtml=>new one with info
     details project can be editted
         ?? how to edit data, have it stay in input field
@@ -43,3 +30,13 @@ Random notes and reminders
 
 Extra Credit
     Calendar with task due dates 
+
+%^&%^&%^&%^&%^&%^&%^&
+edit project
+return to project after edit
+return to project after edit task
+return to project after project creation
+probably different styles needed for different forms
+2 add task buttons?
+don't take empty fields
+edit task

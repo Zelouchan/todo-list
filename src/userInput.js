@@ -1,8 +1,8 @@
 // deals with all user input
 import { createProjectButton } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage";
+import { displayProjectDetails } from "./createForms.js";
 const allProjects = getStoredProjects();
-
 
 class Project {
   constructor(title, description, dueDate, priority, finished, tasks = []) {
@@ -47,8 +47,11 @@ export function takeProjectFormInput() {
   allProjects.push(newProject);
   saveProjects(allProjects);
 
+  const projectIndex = allProjects.length - 1;
+
   createProjectButton();
-  contentBox.innerHTML = ""; // Clear the form
+
+  displayProjectDetails(projectIndex);
 }
 
 class Task {
@@ -58,8 +61,8 @@ class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.finished = finished;
-  
-} }
+  } 
+}
 
 export function takeTaskFormInput(projectIndex) {
   const contentBox = document.getElementById("content");
@@ -113,23 +116,23 @@ export function changeProjectForm(index) {
   createProjectButton(index);
 }
 
-// export function changeTasksForm(projectIndex, taskIndex) {
-//   const allProjects = getStoredProjects();
-//   const project = allProjects[projectIndex];
+export function changeTasksForm(projectIndex, taskIndex) {
+  const allProjects = getStoredProjects();
+  const project = allProjects[projectIndex];
 
-//   if (!project || !project.tasks[taskIndex]) {
-//       console.error("Project or task not found.");
-//       return;
-//   }
+  if (!project || !project.tasks[taskIndex]) {
+      console.error("Project or task not found.");
+      return;
+  }
 
-//   project.tasks[taskIndex] = { 
-//       title: document.getElementById("taskTitle").value,
-//       description: document.getElementById("taskDescription").value,
-//       dueDate: document.getElementById("taskDueDate").value,
-//       priority: document.getElementById("taskPriority").value,
-//       finished: document.getElementById("taskFinished").checked,
-//   };
+  project.tasks[taskIndex] = { 
+      title: document.getElementById("taskTitle").value,
+      description: document.getElementById("taskDescription").value,
+      dueDate: document.getElementById("taskDueDate").value,
+      priority: document.getElementById("taskPriority").value,
+      finished: document.getElementById("taskFinished").checked,
+  };
 
-//   saveProjects(allProjects);
-//   displayProjectDetails(projectIndex);
-// }
+  saveProjects(allProjects);
+  displayProjectDetails(project.tasks[projectIndex]);
+}

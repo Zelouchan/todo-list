@@ -1,4 +1,5 @@
 const contentBox = document.getElementById("content");
+
 import {
   takeProjectFormInput,
   changeProjectForm,
@@ -6,7 +7,7 @@ import {
 } from "./userInput";
 import { saveProjects, getStoredProjects } from "./localStorage";
 import {
-  createNewTasktForm,
+  createNewTaskForm,
   callProjectForm,
   displayProjectDetails,
 } from "./createForms";
@@ -85,7 +86,7 @@ export function createDropdown(aiDee, textInput, projectValue) {
   formContainer.appendChild(dropdown);
 }
 
-export function submitProjectButton() {
+export function submitProjectButton(projectIndex) {
   const formContainer = document.querySelector("form");
   let submitProjectButton = document.createElement("button");
   submitProjectButton.type = "submit";
@@ -96,6 +97,7 @@ export function submitProjectButton() {
   submitProjectButton.addEventListener("click", (event) => {
     event.preventDefault();
     takeProjectFormInput();
+
     console.log("Form submitted!");
   });
 }
@@ -105,12 +107,13 @@ export function submitTaskButton(projectIndex) {
   let submitTaskButton = document.createElement("button");
   submitTaskButton.type = "submit";
   submitTaskButton.innerText = "Submit";
-  submitTaskButton.id = "submitBTN";
+  submitTaskButton.id = "submitTBTN";
   formContainer.appendChild(submitTaskButton);
 
   submitTaskButton.addEventListener("click", (event) => {
     event.preventDefault();
     takeTaskFormInput(projectIndex);
+    displayProjectDetails(projectIndex);
     console.log("Form submitted!");
   });
 }
@@ -159,7 +162,7 @@ export function addTask(projectIndex) {
 
   addTaskButton.addEventListener("click", (event) => {
     event.preventDefault();
-    createNewTasktForm(projectIndex);
+    createNewTaskForm(projectIndex);
   });
 }
 
@@ -189,7 +192,7 @@ export function createProjectButton() {
     projectButton.addEventListener("click", (event) => {
       displayProjectDetails(index);
       const projectIndex = event.target.dataset.index;
-      addTask(projectIndex);
+      addTask(index);
     });
   });
 }
