@@ -1,7 +1,15 @@
 const contentBox = document.getElementById("content");
-import { takeProjectFormInput, changeProjectForm, takeTaskFormInput } from "./userInput";
+import {
+  takeProjectFormInput,
+  changeProjectForm,
+  takeTaskFormInput,
+} from "./userInput";
 import { saveProjects, getStoredProjects } from "./localStorage";
-import { createNewTasktForm, callProjectForm, displayProjectDetails } from "./createForms";
+import {
+  createNewTasktForm,
+  callProjectForm,
+  displayProjectDetails,
+} from "./createForms";
 
 export function createInputForm(klas) {
   const inputForm = document.createElement("form");
@@ -89,7 +97,6 @@ export function submitProjectButton() {
     event.preventDefault();
     takeProjectFormInput();
     console.log("Form submitted!");
-
   });
 }
 
@@ -105,7 +112,6 @@ export function submitTaskButton(projectIndex) {
     event.preventDefault();
     takeTaskFormInput(projectIndex);
     console.log("Form submitted!");
-
   });
 }
 
@@ -182,8 +188,8 @@ export function createProjectButton() {
 
     projectButton.addEventListener("click", (event) => {
       displayProjectDetails(index);
-    const projectIndex = event.target.dataset.index;
-    addTask(projectIndex);
+      const projectIndex = event.target.dataset.index;
+      addTask(projectIndex);
     });
   });
 }
@@ -195,4 +201,13 @@ export function editProjectButton() {
   editProjectButton.innerText = "Edit Project";
   editProjectButton.id = "editProject";
   formContainer.appendChild(editProjectButton);
-  };
+}
+
+export function deleteTask(projectIndex, taskIndex) {
+  const allProjects = getStoredProjects();
+  const project = allProjects[projectIndex];
+
+  project.tasks.splice(taskIndex, 1);
+  localStorage.setItem("projects", JSON.stringify(allProjects));
+  displayProjectDetails(projectIndex);
+}

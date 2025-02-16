@@ -11,7 +11,8 @@ import {
   submitProjectButton,
   deleteButton,
   saveChangesButton,
-  editProjectButton
+  editProjectButton,
+  deleteTask
 } from "./helperFunctions.js";
 import { getStoredProjects, saveProjects } from "./localStorage.js";
 
@@ -103,90 +104,84 @@ export function displayProjectDetails(projectIndex) {
   if (!project) {
     alert("Project not found");
     return;
-  } else {
-    const contentBox = document.getElementById("content");
-    contentBox.innerHTML = "";
-    createInputForm();
-    const formContainer = document.querySelector("form");
-    const detailsContainer = document.createElement('div'); 
-    detailsContainer.id = "detailsCont";
-
-    const titleHeading = document.createElement('h2');
-    titleHeading.textContent = project.title;
-
-    const descriptionParagraph = document.createElement('p');
-    descriptionParagraph.textContent = project.description;
-
-    const dueDateParagraph = document.createElement('p');
-    dueDateParagraph.textContent = `Due Date: ${project.dueDate}`; 
-
-    const priorityParagraph = document.createElement('p');
-    priorityParagraph.textContent = `Priority: ${project.priority}`;
-
-    formContainer.appendChild(detailsContainer);
-    detailsContainer.appendChild(titleHeading);
-    detailsContainer.appendChild(descriptionParagraph);
-    detailsContainer.appendChild(dueDateParagraph);
-    detailsContainer.appendChild(priorityParagraph);
-
-    const taskContainer = document.createElement("div");
-    taskContainer.id = "taskCont";
-    formContainer.appendChild(taskContainer);
-    
-    const allTasks = allProjects[projectIndex].tasks || [];
-    
-    allTasks.forEach((task, index) => {
-      if (!task || !task.priority) {
-        console.warn(`Task at index ${index} is missing required properties.`);
-        return;
-      }
-    
-      const taskDiv = document.createElement("div");
-      taskDiv.classList.add("singleTask", task.priority.toLowerCase());
-    
-      const taskHeading = document.createElement("h3");
-      taskHeading.textContent = task.title;
-    
-      const tasksParagraph = document.createElement("p");
-      tasksParagraph.textContent = task.description;
-    
-      const tasksDueDateParagraph = document.createElement("p");
-      tasksDueDateParagraph.textContent = `Due Date: ${task.dueDate}`;
-    
-      taskDiv.appendChild(taskHeading);
-      taskDiv.appendChild(tasksParagraph);
-      taskDiv.appendChild(tasksDueDateParagraph);
-      
-      taskContainer.appendChild(taskDiv);
-    });
-    
-
-    // const taskHeading = document.createElement('h2');
-    // taskHeading.textContent = `${project.tasks[0].title}`;
-
-    // const tasksParagraph = document.createElement('p');
-    // tasksParagraph.textContent = `${project.tasks[0].description}`;
-
-    // const tasksDueDateParagraph = document.createElement('p');
-    // tasksDueDateParagraph.textContent = `Due Date: ${project.tasks[0].dueDate}`; 
-
-    editProjectButton();
-    deleteButton();
-    addTask(projectIndex);
-
-    taskContainer.appendChild(taskHeading);
-    taskContainer.appendChild(tasksParagraph);
-    taskContainer.appendChild(tasksDueDateParagraph);
-
-    // editProjectButton();
-    // deleteButton();
-    // detailsContainer.innerText = `${project.tasks.title}`;
-
-    const editProjectBut  = document.getElementById("editProject");
-
-    editProjectBut.addEventListener("click", (event) => {
-      event.preventDefault();
-      callProjectForm();
-    });
   }
+
+  const contentBox = document.getElementById("content");
+  contentBox.innerHTML = "";
+  createInputForm();
+  const formContainer = document.querySelector("form");
+  const detailsContainer = document.createElement("div");
+  detailsContainer.id = "detailsCont";
+
+  const titleHeading = document.createElement("h2");
+  titleHeading.textContent = project.title;
+
+  const descriptionParagraph = document.createElement("p");
+  descriptionParagraph.textContent = project.description;
+
+  const dueDateParagraph = document.createElement("p");
+  dueDateParagraph.textContent = `Due Date: ${project.dueDate}`;
+
+  const priorityParagraph = document.createElement("p");
+  priorityParagraph.textContent = `Priority: ${project.priority}`;
+
+  formContainer.appendChild(detailsContainer);
+  detailsContainer.appendChild(titleHeading);
+  detailsContainer.appendChild(descriptionParagraph);
+  detailsContainer.appendChild(dueDateParagraph);
+  detailsContainer.appendChild(priorityParagraph);
+
+  const taskContainer = document.createElement("div");
+  taskContainer.id = "taskCont";
+  formContainer.appendChild(taskContainer);
+
+  const allTasks = allProjects[projectIndex].tasks || [];
+
+  allTasks.forEach((task, index) => {
+
+    const taskDiv = document.createElement("div");
+    taskDiv.classList.add("singleTask", task.priority.toLowerCase());
+
+    const taskHeading = document.createElement("h3");
+    taskHeading.textContent = task.title;
+
+    const tasksParagraph = document.createElement("p");
+    tasksParagraph.textContent = task.description;
+
+    const tasksDueDateParagraph = document.createElement("p");
+    tasksDueDateParagraph.textContent = `Due Date: ${task.dueDate}`;
+
+    const editTaskButton = document.createElement("button");
+    editTaskButton.textContent = "Edit";
+    editTaskButton.classList.add("smallTaskButton");
+    editTaskButton.addEventListener("click", () =>
+      editTask(projectIndex, index)
+    );
+
+    const deleteTaskButton = document.createElement("button");
+    deleteTaskButton.textContent = "Delete";
+    deleteTaskButton.classList.add("smallTaskButton");
+    deleteTaskButton.addEventListener("click", () =>
+      deleteTask(projectIndex, index)
+    );
+
+    taskDiv.appendChild(taskHeading);
+    taskDiv.appendChild(tasksParagraph);
+    taskDiv.appendChild(tasksDueDateParagraph);
+    taskDiv.appendChild(editTaskButton);
+    taskDiv.appendChild(deleteTaskButton);
+
+    taskContainer.appendChild(taskDiv);
+  });
+
+  editProjectButton();
+  deleteButton();
+  addTask(projectIndex);
+
+  const editProjectBut = document.getElementById("editProject");
+
+  editProjectBut.addEventListener("click", (event) => {
+    event.preventDefault();
+    callProjectForm();
+  });
 }

@@ -4,8 +4,8 @@ import "./style.css";
 import { headerFooter } from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
 import { getStoredProjects } from "./localStorage.js";
-import { createNewProjectForm } from "./createForms.js";
-import { createProjectButton } from "./helperFunctions.js";
+import { createNewProjectForm } from "./userInterface.js";
+import { createProjectButton } from "./functions.js";
 
 headerFooter();
 setUpNavBar();
