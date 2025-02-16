@@ -108,7 +108,8 @@ export function displayProjectDetails(projectIndex) {
     contentBox.innerHTML = "";
     createInputForm();
     const formContainer = document.querySelector("form");
-    const detailsContainer = document.createElement('div'); // Or whatever container you prefer
+    const detailsContainer = document.createElement('div'); 
+    detailsContainer.id = "detailsCont";
 
     const titleHeading = document.createElement('h2');
     titleHeading.textContent = project.title;
@@ -117,7 +118,7 @@ export function displayProjectDetails(projectIndex) {
     descriptionParagraph.textContent = project.description;
 
     const dueDateParagraph = document.createElement('p');
-    dueDateParagraph.textContent = `Due Date: ${project.dueDate}`; // Nicer formatting
+    dueDateParagraph.textContent = `Due Date: ${project.dueDate}`; 
 
     const priorityParagraph = document.createElement('p');
     priorityParagraph.textContent = `Priority: ${project.priority}`;
@@ -127,9 +128,59 @@ export function displayProjectDetails(projectIndex) {
     detailsContainer.appendChild(descriptionParagraph);
     detailsContainer.appendChild(dueDateParagraph);
     detailsContainer.appendChild(priorityParagraph);
+
+    const taskContainer = document.createElement("div");
+    taskContainer.id = "taskCont";
+    formContainer.appendChild(taskContainer);
+    
+    const allTasks = allProjects[projectIndex].tasks || [];
+    
+    allTasks.forEach((task, index) => {
+      if (!task || !task.priority) {
+        console.warn(`Task at index ${index} is missing required properties.`);
+        return;
+      }
+    
+      const taskDiv = document.createElement("div");
+      taskDiv.classList.add("singleTask", task.priority.toLowerCase());
+    
+      const taskHeading = document.createElement("h3");
+      taskHeading.textContent = task.title;
+    
+      const tasksParagraph = document.createElement("p");
+      tasksParagraph.textContent = task.description;
+    
+      const tasksDueDateParagraph = document.createElement("p");
+      tasksDueDateParagraph.textContent = `Due Date: ${task.dueDate}`;
+    
+      taskDiv.appendChild(taskHeading);
+      taskDiv.appendChild(tasksParagraph);
+      taskDiv.appendChild(tasksDueDateParagraph);
+      
+      taskContainer.appendChild(taskDiv);
+    });
+    
+
+    // const taskHeading = document.createElement('h2');
+    // taskHeading.textContent = `${project.tasks[0].title}`;
+
+    // const tasksParagraph = document.createElement('p');
+    // tasksParagraph.textContent = `${project.tasks[0].description}`;
+
+    // const tasksDueDateParagraph = document.createElement('p');
+    // tasksDueDateParagraph.textContent = `Due Date: ${project.tasks[0].dueDate}`; 
+
     editProjectButton();
     deleteButton();
-    // addTask();
+    addTask(projectIndex);
+
+    taskContainer.appendChild(taskHeading);
+    taskContainer.appendChild(tasksParagraph);
+    taskContainer.appendChild(tasksDueDateParagraph);
+
+    // editProjectButton();
+    // deleteButton();
+    // detailsContainer.innerText = `${project.tasks.title}`;
 
     const editProjectBut  = document.getElementById("editProject");
 
