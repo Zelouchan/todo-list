@@ -204,7 +204,21 @@ input[type="checkbox"]:checked::after {
 }
 
 .singleTask {
-  display: flex;
-  background-color: yellow;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+  margin: 1% 0%;
+  padding: 2%;
+  border-bottom: 5px solid var(--purpureus);
+}
+
+.high {
+  border-right: 25px solid red;
+}
+
+.mid {
+  border-right: 25px solid orange;
+}
+
+.low {
+  border-right: 25px solid green;
 }
