@@ -183,12 +183,7 @@ export function createProjectButton() {
 
   const allProjects = getStoredProjects();
 
-  const sorted = allProjects.sort((a, b) => a.title.localeCompare(b.title));
-  saveProjects(sorted);
-
-  projectButtonsContainer.innerHTML = "";
-
-  sorted.forEach((project, index) => {
+  allProjects.forEach((project, index) => {
     const projectButton = document.createElement("button");
     projectButton.id = `project-${index}`;
     projectButton.dataset.index = index;
