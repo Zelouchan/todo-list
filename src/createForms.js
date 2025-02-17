@@ -13,10 +13,11 @@ import {
   deleteButton,
   saveChangesButton,
   editProjectButton,
-  deleteTask
+  deleteTask,
 } from "./helperFunctions.js";
-import { getStoredProjects, saveProjects } from "./localStorage.js";
-import { changeTasksForm } from "./userInput.js";
+import { getStoredProjects } from "./localStorage.js";
+import { format } from "date-fns";
+
 
 export function createNewProjectForm() {
   contentBox.innerHTML = "";
@@ -72,31 +73,34 @@ export function callProjectForm(projectIndex) {
   deleteButton(projectIndex);
 }
 
-export function callTaskForm(index) {
+export function callTaskForm(projectIndex, index) {
   contentBox.innerHTML = "";
   const allProjects = getStoredProjects();
-  const project = allProjects[index];
+  const project = allProjects[projectIndex];
+  const task = project.tasks[index];
 
-  if (!project) {
+  if (!task) {
     console.error("Project not found.");
     return;
   }
 
-  let projectTitle = project.title || "";
-  let projectDescription = project.description || "";
-  let projectDueDate = project.dueDate || "";
-  let projectPriority = project.priority || "Medium";
-  let projectFinished = project.finished || false;
+  let taskTitle = task.title || "";
+  let taskDescription = task.description || "";
+  let taskDueDate = task.dueDate || "";
+  let taskPriority = task.priority || "Medium";
+  let taskFinished = task.finished || false;
 
   createInputForm("inputForm");
-  createInputText("taskTitle", "Title: ", projectTitle);
-  createInputText("taskDescription", "Description: ", projectDescription);
-  createDate("taskDueDate", "Due Date: ", projectDueDate);
-  createDropdown("taskPriority", "Priority Level: ", projectPriority);
-  createCheckbox("taskFinished", "Task Finished? ", projectFinished);
+  createInputText("taskTitle", "Title: ", taskTitle);
+  createInputText("taskDescription", "Description: ", taskDescription);
+  createDate("taskDueDate", "Due Date: ", taskDueDate);
+  createDropdown("taskPriority", "Priority Level: ", taskPriority);
+  createCheckbox("taskFinished", "Task Finished? ", taskFinished);
   saveChangesButton(index);
   deleteButton(index);
 }
+
+
 
 export function displayProjectDetails(projectIndex) {
   const allProjects = getStoredProjects();
@@ -109,7 +113,7 @@ export function displayProjectDetails(projectIndex) {
 
   const contentBox = document.getElementById("content");
   contentBox.innerHTML = "";
-  createInputForm();
+  createInputForm("projectDisplayContainer");
   const formContainer = document.querySelector("form");
   const detailsContainer = document.createElement("div");
   detailsContainer.id = "detailsCont";
@@ -120,11 +124,15 @@ export function displayProjectDetails(projectIndex) {
   const descriptionParagraph = document.createElement("p");
   descriptionParagraph.textContent = project.description;
 
+  const dueDate = new Date(project.dueDate);
+  const formattedDate = format(dueDate, 'dd-MMM-yy');
   const dueDateParagraph = document.createElement("p");
-  dueDateParagraph.textContent = `Due Date: ${project.dueDate}`;
+  dueDateParagraph.textContent = "Due: " + formattedDate;
 
   const priorityParagraph = document.createElement("p");
   priorityParagraph.textContent = `Priority: ${project.priority}`;
+
+  detailsContainer.classList.add(project.priority.toLowerCase());
 
   formContainer.appendChild(detailsContainer);
   detailsContainer.appendChild(titleHeading);
@@ -138,8 +146,13 @@ export function displayProjectDetails(projectIndex) {
 
   const allTasks = allProjects[projectIndex].tasks || [];
 
-  allTasks.forEach((task, index) => {
+  const sortedTasks = allTasks.sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return dateA - dateB;
+  });
 
+  sortedTasks.forEach((task, index) => {
     const taskDiv = document.createElement("div");
     taskDiv.classList.add("singleTask", task.priority.toLowerCase());
 
@@ -149,14 +162,17 @@ export function displayProjectDetails(projectIndex) {
     const tasksParagraph = document.createElement("p");
     tasksParagraph.textContent = task.description;
 
+    const dueDate = new Date(task.dueDate);
+    const formattedDate = format(dueDate, 'dd-MMM-yy');
     const tasksDueDateParagraph = document.createElement("p");
-    tasksDueDateParagraph.textContent = `Due Date: ${task.dueDate}`;
+    tasksDueDateParagraph.textContent = "Due: " + formattedDate;
 
     const editTaskButton = document.createElement("button");
     editTaskButton.textContent = "Edit";
     editTaskButton.classList.add("smallTaskButton");
-    editTaskButton.addEventListener("click", () =>
-      changeTasksForm(projectIndex, index)
+    editTaskButton.addEventListener("click", (event) =>{
+      event.preventDefault();
+      callTaskForm(projectIndex, index);}
     );
 
     const deleteTaskButton = document.createElement("button");
@@ -175,6 +191,7 @@ export function displayProjectDetails(projectIndex) {
     taskContainer.appendChild(taskDiv);
   });
 
+  addTask(projectIndex);
   editProjectButton();
   deleteButton();
 

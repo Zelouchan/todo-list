@@ -8,7 +8,6 @@ import {
 import { saveProjects, getStoredProjects } from "./localStorage";
 import {
   createNewTaskForm,
-  callProjectForm,
   displayProjectDetails,
 } from "./createForms";
 
@@ -86,7 +85,7 @@ export function createDropdown(aiDee, textInput, projectValue) {
   formContainer.appendChild(dropdown);
 }
 
-export function submitProjectButton(projectIndex) {
+export function submitProjectButton() {
   const formContainer = document.querySelector("form");
   let submitProjectButton = document.createElement("button");
   submitProjectButton.type = "submit";
@@ -181,7 +180,12 @@ export function createProjectButton() {
 
   const allProjects = getStoredProjects();
 
-  allProjects.forEach((project, index) => {
+  const sorted = allProjects.sort((a, b) => a.title.localeCompare(b.title));
+  saveProjects(sorted);
+
+  projectButtonsContainer.innerHTML = "";
+
+  sorted.forEach((project, index) => {
     const projectButton = document.createElement("button");
     projectButton.id = `project-${index}`;
     projectButton.dataset.index = index;
@@ -192,7 +196,6 @@ export function createProjectButton() {
     projectButton.addEventListener("click", (event) => {
       displayProjectDetails(index);
       const projectIndex = event.target.dataset.index;
-      addTask(index);
     });
   });
 }

@@ -3,40 +3,4 @@ Key:
     ?? google
     ~~ extra credit option
 
-Still to do:
-Create task button in project page
-Give tasks same functionality as projects, but only from project page
-Create a list in the project of task titles and priority flag with an edit button to call all the information 
-won't allow fields with no input
-create a new project clears contentbox
-
-Create Task
-    task name
-      Expand task for edit and details
-        \\ pop up screen or no wait when drop down button is click delete innerhtml=>new one with info
-    details project can be editted
-        ?? how to edit data, have it stay in input field
-    
-Main User Interface 
-    nav bar - sort projects by due date
-        \\ populate with example projects
-    add projects button
-        \\ once new project is created will take to project page
-
-Random notes and reminders
-    Default project when app opens is first due
-    sort tasks in project either by due date OR priority
-    Make sure no error if there is nothing in local storage
-
-Extra Credit
-    Calendar with task due dates 
-
-%^&%^&%^&%^&%^&%^&%^&
-edit project
-return to project after edit
-return to project after edit task
-return to project after project creation
-probably different styles needed for different forms
-2 add task buttons?
-don't take empty fields
-edit task
+finished - strike through

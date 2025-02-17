@@ -23,10 +23,13 @@ export function takeProjectFormInput() {
   const projectPriorityInput = document.getElementById("projectPriority");
   const projectFinishedInput = document.getElementById("projectFinished");
 
-  if (!projectTitleInput || !projectDescriptionInput || !projectDueDateInput || !projectPriorityInput || !projectFinishedInput) {
-      console.error("One or more input elements not found!");
-      return; // Stop execution to prevent further errors
-  }
+    if (!projectTitleInput.value.trim() || 
+        !projectDescriptionInput.value.trim() || 
+        !projectDueDateInput.value.trim()) {
+        
+        alert("Please fill in all required fields.");
+        return;
+    }
 
   const projectTitle = projectTitleInput.value;
   const projectDescription = projectDescriptionInput.value;
@@ -71,6 +74,14 @@ export function takeTaskFormInput(projectIndex) {
   const taskDueDateInput = document.getElementById("taskDueDate");
   const taskPriorityInput = document.getElementById("taskPriority");
   const taskFinishedInput = document.getElementById("taskFinished");
+
+  if (!taskTitleInput.value.trim() || 
+  !taskDescriptionInput.value.trim() || 
+  !taskDueDateInput.value.trim()) {
+  
+  alert("Please fill in all required fields.");
+  return;
+}
 
   const taskTitle = taskTitleInput.value;
   const taskDescription = taskDescriptionInput.value;
@@ -121,18 +132,30 @@ export function changeTasksForm(projectIndex, taskIndex) {
   const project = allProjects[projectIndex];
 
   if (!project || !project.tasks[taskIndex]) {
-      console.error("Project or task not found.");
-      return;
+    console.error("Project or task not found.");
+    return;
   }
 
-  project.tasks[taskIndex] = { 
-      title: document.getElementById("taskTitle").value,
-      description: document.getElementById("taskDescription").value,
-      dueDate: document.getElementById("taskDueDate").value,
-      priority: document.getElementById("taskPriority").value,
-      finished: document.getElementById("taskFinished").checked,
+  const titleElement = document.getElementById("taskTitle");
+  const descriptionElement = document.getElementById("taskDescription");
+  const dueDateElement = document.getElementById("taskDueDate");
+  const priorityElement = document.getElementById("taskPriority");
+  const finishedElement = document.getElementById("taskFinished");
+
+  if (!titleElement || !descriptionElement || !dueDateElement || !priorityElement || !finishedElement) {
+    console.error("One or more form elements not found.");
+    return;
+  }
+
+  project.tasks[taskIndex] = {
+    title: titleElement.value,
+    description: descriptionElement.value,
+    dueDate: dueDateElement.value,
+    priority: priorityElement.value,
+    finished: finishedElement.checked,
   };
 
   saveProjects(allProjects);
-  displayProjectDetails(project.tasks[projectIndex]);
+  displayProjectDetails(projectIndex);
 }
+
