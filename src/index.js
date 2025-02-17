@@ -1,5 +1,4 @@
 // index.js
-import { compareAsc, format } from "date-fns";
 import "./style.css";
 import { headerFooter } from "./HeaderFooter";
 import { setUpNavBar } from "./nav.js";
@@ -8,7 +7,7 @@ import { createProjectButton } from "./helperFunctions.js";
 
 headerFooter();
 setUpNavBar();
-displayProjectDetails(0);
+displayProjectDetails(0); //loads project onto the screen
 createProjectButton();
 
 const newProject = document.getElementById("createNewProject");
@@ -16,7 +15,3 @@ newProject.addEventListener("click", createNewProjectForm);
 
 createProjectButton();
 
-const today = new Date();
-
-const formattedDate = format(today, 'dd-MM-yy');
-console.log(formattedDate); 

@@ -15,6 +15,7 @@ class Project {
   }
 }
 
+// function that saves the new project into the array
 export function takeProjectFormInput() {
   const contentBox = document.getElementById("content");
   const projectTitleInput = document.getElementById("projectTitle");
@@ -23,13 +24,14 @@ export function takeProjectFormInput() {
   const projectPriorityInput = document.getElementById("projectPriority");
   const projectFinishedInput = document.getElementById("projectFinished");
 
-    if (!projectTitleInput.value.trim() || 
-        !projectDescriptionInput.value.trim() || 
-        !projectDueDateInput.value.trim()) {
-        
-        alert("Please fill in all required fields.");
-        return;
-    }
+  if (
+    !projectTitleInput.value.trim() ||
+    !projectDescriptionInput.value.trim() ||
+    !projectDueDateInput.value.trim()
+  ) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
   const projectTitle = projectTitleInput.value;
   const projectDescription = projectDescriptionInput.value;
@@ -39,12 +41,12 @@ export function takeProjectFormInput() {
   const projectTasks = [];
 
   const newProject = new Project(
-      projectTitle,
-      projectDescription,
-      projectDueDate,
-      projectPriority,
-      projectFinished,
-      projectTasks
+    projectTitle,
+    projectDescription,
+    projectDueDate,
+    projectPriority,
+    projectFinished,
+    projectTasks
   );
 
   allProjects.push(newProject);
@@ -53,7 +55,6 @@ export function takeProjectFormInput() {
   const projectIndex = allProjects.length - 1;
 
   createProjectButton();
-
   displayProjectDetails(projectIndex);
 }
 
@@ -64,9 +65,10 @@ class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.finished = finished;
-  } 
+  }
 }
 
+//function that saves the task information into the array attached to the correct project
 export function takeTaskFormInput(projectIndex) {
   const contentBox = document.getElementById("content");
   const taskTitleInput = document.getElementById("taskTitle");
@@ -75,13 +77,14 @@ export function takeTaskFormInput(projectIndex) {
   const taskPriorityInput = document.getElementById("taskPriority");
   const taskFinishedInput = document.getElementById("taskFinished");
 
-  if (!taskTitleInput.value.trim() || 
-  !taskDescriptionInput.value.trim() || 
-  !taskDueDateInput.value.trim()) {
-  
-  alert("Please fill in all required fields.");
-  return;
-}
+  if (
+    !taskTitleInput.value.trim() ||
+    !taskDescriptionInput.value.trim() ||
+    !taskDueDateInput.value.trim()
+  ) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
   const taskTitle = taskTitleInput.value;
   const taskDescription = taskDescriptionInput.value;
@@ -90,27 +93,27 @@ export function takeTaskFormInput(projectIndex) {
   const taskFinished = taskFinishedInput.checked;
 
   const newTask = new Task(
-      taskTitle,
-      taskDescription,
-      taskDueDate,
-      taskPriority,
-      taskFinished
+    taskTitle,
+    taskDescription,
+    taskDueDate,
+    taskPriority,
+    taskFinished
   );
 
-  if (!allProjects[projectIndex]) { // Check if the project exists
+  if (!allProjects[projectIndex]) {
+    // Check if the project exists
     console.error("Project not found at index:", projectIndex);
     return;
   }
 
-allProjects[projectIndex].tasks.push(newTask);
-
+  allProjects[projectIndex].tasks.push(newTask);
 
   saveProjects(allProjects);
-
   createProjectButton(projectIndex);
   contentBox.innerHTML = ""; // Clear the form
 }
 
+// overwrites the current values of the project in the array, doesn't create a new array object.
 export function changeProjectForm(index) {
   let allProjects = getStoredProjects();
   let updatedProject = {
@@ -123,10 +126,10 @@ export function changeProjectForm(index) {
 
   allProjects[index] = updatedProject;
   saveProjects(allProjects);
-
   createProjectButton(index);
 }
 
+// creates a task form with the task details already displayed for editting
 export function changeTasksForm(projectIndex, taskIndex) {
   const allProjects = getStoredProjects();
   const project = allProjects[projectIndex];
@@ -142,7 +145,13 @@ export function changeTasksForm(projectIndex, taskIndex) {
   const priorityElement = document.getElementById("taskPriority");
   const finishedElement = document.getElementById("taskFinished");
 
-  if (!titleElement || !descriptionElement || !dueDateElement || !priorityElement || !finishedElement) {
+  if (
+    !titleElement ||
+    !descriptionElement ||
+    !dueDateElement ||
+    !priorityElement ||
+    !finishedElement
+  ) {
     console.error("One or more form elements not found.");
     return;
   }
@@ -158,4 +167,3 @@ export function changeTasksForm(projectIndex, taskIndex) {
   saveProjects(allProjects);
   displayProjectDetails(projectIndex);
 }
-

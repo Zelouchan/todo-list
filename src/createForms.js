@@ -18,7 +18,7 @@ import {
 import { getStoredProjects } from "./localStorage.js";
 import { format } from "date-fns";
 
-
+// creates empty project form
 export function createNewProjectForm() {
   contentBox.innerHTML = "";
   createInputForm("inputForm");
@@ -31,6 +31,7 @@ export function createNewProjectForm() {
   console.log("create project");
 }
 
+// creates empty task form
 export function createNewTaskForm(projectIndex) {
   contentBox.innerHTML = "";
   createInputForm("inputForm");
@@ -42,6 +43,7 @@ export function createNewTaskForm(projectIndex) {
   submitTaskButton(projectIndex);
 }
 
+//creates project form with previously filled in values present
 export function callProjectForm(projectIndex) {
   contentBox.innerHTML = "";
   const allProjects = getStoredProjects();
@@ -73,6 +75,7 @@ export function callProjectForm(projectIndex) {
   deleteButton(projectIndex);
 }
 
+// creates task for with previously filled in values present
 export function callTaskForm(projectIndex, index) {
   contentBox.innerHTML = "";
   const allProjects = getStoredProjects();
@@ -100,8 +103,7 @@ export function callTaskForm(projectIndex, index) {
   deleteButton(index);
 }
 
-
-
+// displays project with the list of tasks attatched
 export function displayProjectDetails(projectIndex) {
   const allProjects = getStoredProjects();
   const project = allProjects[projectIndex];
@@ -125,7 +127,7 @@ export function displayProjectDetails(projectIndex) {
   descriptionParagraph.textContent = project.description;
 
   const dueDate = new Date(project.dueDate);
-  const formattedDate = format(dueDate, 'dd-MMM-yy');
+  const formattedDate = format(dueDate, "dd-MMM-yy");
   const dueDateParagraph = document.createElement("p");
   dueDateParagraph.textContent = "Due: " + formattedDate;
 
@@ -146,6 +148,7 @@ export function displayProjectDetails(projectIndex) {
 
   const allTasks = allProjects[projectIndex].tasks || [];
 
+  //sorts list of tasks by due date
   const sortedTasks = allTasks.sort((a, b) => {
     const dateA = new Date(a.dueDate);
     const dateB = new Date(b.dueDate);
@@ -163,17 +166,17 @@ export function displayProjectDetails(projectIndex) {
     tasksParagraph.textContent = task.description;
 
     const dueDate = new Date(task.dueDate);
-    const formattedDate = format(dueDate, 'dd-MMM-yy');
+    const formattedDate = format(dueDate, "dd-MMM-yy");
     const tasksDueDateParagraph = document.createElement("p");
     tasksDueDateParagraph.textContent = "Due: " + formattedDate;
 
     const editTaskButton = document.createElement("button");
     editTaskButton.textContent = "Edit";
     editTaskButton.classList.add("smallTaskButton");
-    editTaskButton.addEventListener("click", (event) =>{
+    editTaskButton.addEventListener("click", (event) => {
       event.preventDefault();
-      callTaskForm(projectIndex, index);}
-    );
+      callTaskForm(projectIndex, index);
+    });
 
     const deleteTaskButton = document.createElement("button");
     deleteTaskButton.textContent = "Delete";

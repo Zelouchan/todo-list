@@ -4,6 +4,7 @@ export function getStoredProjects() {
   return storedProjects ? JSON.parse(storedProjects) : null; // Return null if nothing is found
 }
 
+// save projects to local storage
 export function saveProjects(projects) {
   localStorage.setItem("projects", JSON.stringify(projects));
 }

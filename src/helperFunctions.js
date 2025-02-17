@@ -6,17 +6,16 @@ import {
   takeTaskFormInput,
 } from "./userInput";
 import { saveProjects, getStoredProjects } from "./localStorage";
-import {
-  createNewTaskForm,
-  displayProjectDetails,
-} from "./createForms";
+import { createNewTaskForm, displayProjectDetails } from "./createForms";
 
+//creates the container element for styling purposes
 export function createInputForm(klas) {
   const inputForm = document.createElement("form");
   inputForm.classList.add(klas);
   contentBox.appendChild(inputForm);
 }
 
+// creates a text input field
 export function createInputText(aiDee, textInput, projectValue, length) {
   const formContainer = document.querySelector("form");
   const inputField = document.createElement("input");
@@ -33,6 +32,7 @@ export function createInputText(aiDee, textInput, projectValue, length) {
   formContainer.appendChild(inputField);
 }
 
+//creates a date input field
 export function createDate(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const inputField = document.createElement("input");
@@ -48,6 +48,7 @@ export function createDate(aiDee, textInput, projectValue) {
   formContainer.appendChild(inputField);
 }
 
+// creates a checkbox
 export function createCheckbox(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const checkbox = document.createElement("input");
@@ -63,6 +64,7 @@ export function createCheckbox(aiDee, textInput, projectValue) {
   formContainer.appendChild(checkbox);
 }
 
+// creates the priority drop down menu
 export function createDropdown(aiDee, textInput, projectValue) {
   const formContainer = document.querySelector("form");
   const dropdown = document.createElement("select");
@@ -165,6 +167,7 @@ export function addTask(projectIndex) {
   });
 }
 
+//create buttons in the nav bar with the title of the projects present in the array
 export function createProjectButton() {
   const navBarMain = document.getElementById("nav");
   let projectButtonsContainer = document.getElementById("buttonContainer");
@@ -212,7 +215,6 @@ export function editProjectButton() {
 export function deleteTask(projectIndex, taskIndex) {
   const allProjects = getStoredProjects();
   const project = allProjects[projectIndex];
-
   project.tasks.splice(taskIndex, 1);
   localStorage.setItem("projects", JSON.stringify(allProjects));
   displayProjectDetails(projectIndex);

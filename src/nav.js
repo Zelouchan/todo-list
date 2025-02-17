@@ -7,7 +7,6 @@ export function setUpNavBar() {
   navBarMain.appendChild(createNewProjectButton());
   navBarMain.appendChild(createProjectsTitle());
 
-
   createProjectButton();
 }
 
@@ -17,6 +16,7 @@ function createSortButtonContainer() {
   return navBarContainer;
 }
 
+// creates current title text
 function createProjectsTitle() {
   const projectsTitle = document.createElement("div");
   projectsTitle.innerText = "Current Projects";
