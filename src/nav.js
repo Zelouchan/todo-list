@@ -4,8 +4,9 @@ export function setUpNavBar() {
   const navBarMain = document.getElementById("nav");
 
   navBarMain.appendChild(createSortButtonContainer());
-  navBarMain.appendChild(createProjectsTitle());
   navBarMain.appendChild(createNewProjectButton());
+  navBarMain.appendChild(createProjectsTitle());
+
 
   createProjectButton();
 }
