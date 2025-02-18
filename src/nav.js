@@ -1,4 +1,7 @@
 import { createProjectButton } from "./helperFunctions";
+import { getStoredProjects, saveProjects } from "./localStorage";
+import { Project } from "./userInput";
+
 
 export function setUpNavBar() {
   const navBarMain = document.getElementById("nav");
@@ -6,6 +9,23 @@ export function setUpNavBar() {
   navBarMain.appendChild(createSortButtonContainer());
   navBarMain.appendChild(createNewProjectButton());
   navBarMain.appendChild(createProjectsTitle());
+
+  let allProjects = JSON.parse(localStorage.getItem("projects")) || [];
+  console.log(allProjects);
+
+  if (allProjects.length === 0) {
+    const defaultProject = new Project(
+      "Default Project",
+      "This is a default project description.",
+      new Date().toISOString().split("T")[0], // Today's date
+      "Low",
+      false,
+      []
+    );
+
+    allProjects.push(defaultProject);
+    saveProjects(allProjects);
+  }
 
   createProjectButton();
 }

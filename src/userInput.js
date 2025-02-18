@@ -4,7 +4,7 @@ import { getStoredProjects, saveProjects } from "./localStorage";
 import { displayProjectDetails } from "./createForms.js";
 const allProjects = getStoredProjects();
 
-class Project {
+export class Project {
   constructor(title, description, dueDate, priority, finished, tasks = []) {
     this.title = title;
     this.description = description;
