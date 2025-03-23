@@ -202,6 +202,6 @@ export function displayProjectDetails(projectIndex) {
 
   editProjectBut.addEventListener("click", (event) => {
     event.preventDefault();
-    callProjectForm(index);
+    callProjectForm();
   });
 }

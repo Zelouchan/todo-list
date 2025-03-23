@@ -1,5 +1,5 @@
 import { createProjectButton } from "./helperFunctions";
-import { getStoredProjects, saveProjects } from "./localStorage";
+import { saveProjects } from "./localStorage";
 import { Project } from "./userInput";
 
 

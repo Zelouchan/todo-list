@@ -192,8 +192,9 @@ export function createProjectButton() {
     projectButtonsContainer.appendChild(projectButton);
 
     projectButton.addEventListener("click", (event) => {
+      event.preventDefault();
       displayProjectDetails(index);
-      const projectIndex = event.target.dataset.index;
+
     });
   });
 }

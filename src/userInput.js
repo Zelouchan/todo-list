@@ -17,7 +17,6 @@ export class Project {
 
 // function that saves the new project into the array
 export function takeProjectFormInput() {
-  const contentBox = document.getElementById("content");
   const projectTitleInput = document.getElementById("projectTitle");
   const projectDescriptionInput = document.getElementById("projectDescription");
   const projectDueDateInput = document.getElementById("projectDueDate");
